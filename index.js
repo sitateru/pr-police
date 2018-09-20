@@ -4,11 +4,11 @@
  */
 module.exports = app => {
   // Your code here
-  app.log('Yay, the app was loaded!')
+  app.log('Hello police!')
 
-  app.on('issues.opened', async context => {
-    const issueComment = context.issue({ body: 'Thanks for opening this issue!' })
-    return context.github.issues.createComment(issueComment)
+  app.on('pull_request.opened', async context => {
+    const comment = context.issue({ body: 'Hello This is a sitateru test bot' })
+    return context.github.issues.createComment(comment)
   })
 
   // For more information on building apps:
