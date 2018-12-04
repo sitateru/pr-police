@@ -3,11 +3,14 @@
  * @param {import('probot').Application} app - Probot's Application class.
  */
 module.exports = app => {
-  // Your code here
   app.log('Hello police!')
 
   app.on('pull_request.opened', async context => {
-    const comment = context.issue({ body: 'Hello This is a sitateru test bot' })
+    app.log(context.payload.pull_request.changed_files)
+    if (context.payload.pull_request.changed_files < 2) return
+    const comment = context.issue({
+      body: 'Hello This is a pr-police test bot - beta'
+    })
     return context.github.issues.createComment(comment)
   })
 
